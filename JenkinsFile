@@ -6,14 +6,12 @@ tools{
     jdk 'JDK13'
 }
 
-def gitBranch = 'develop'
 
 parameters {
         choice(name: 'BRANCH', choices: ['master', 'develop'], description: 'Select branch')
 
     }
-    
-gitBranch = params.BRANCH    
+     
     
 stages {
 
@@ -29,7 +27,7 @@ stage ("initialize") {
 
 stage ('Checkout') {
    steps {
-     git branch: "{gitBranch}", url: "https://github.com/srirama-akhilesh/SpringJPA.git"
+     git branch: "${params.BRANCH}", url: "https://github.com/srirama-akhilesh/SpringJPA.git"
    }    
 }
 
