@@ -15,21 +15,21 @@ steps {
 }
 stage ('Compile Stage') {
 steps {
-withMaven(maven : 'maven 3.6.3') {
+withMaven(maven : 'maven3.6.3') {
 bat'mvn clean compile'
 }
 }
 }
 stage ('Testing Stage') {
 steps {
-withMaven(maven : 'maven 3.6.3') {
+withMaven(maven : 'maven3.6.3') {
 bat'mvn test'
 }
 }
 }
 stage ('Install Stage') {
 steps {
-withMaven(maven : 'maven 3.6.3') {
+withMaven(maven : 'maven3.6.3') {
 bat'mvn install'
 }
 }
