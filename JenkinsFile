@@ -6,6 +6,15 @@ tools{
     jdk 'JDK13'
 }
 
+def gitBranch = 'develop'
+
+parameters {
+        choice(name: 'BRANCH', choices: ['master', 'develop'], description: 'Select branch')
+
+    }
+    
+gitBranch = params.BRANCH    
+    
 stages {
 
 stage ("initialize") {
@@ -13,19 +22,15 @@ stage ("initialize") {
         sh '''
         echo "PATH = ${PATH}"
         echo "M2_HOME = ${M2_HOME}"
+        echo "Branch: ${params.BRANCH}"
         '''
     }
 }
 
 stage ('Checkout') {
-    steps {
-        checkout([$class: 'GitSCM',
-        branches: [[name: '*/master']], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [], 
-        userRemoteConfigs: [[url: 'https://github.com/srirama-akhilesh/SpringJPA.git']]])
-     }
+   steps {
+     git branch: "{gitBranch}", url: "https://github.com/srirama-akhilesh/SpringJPA.git"
+   }    
 }
 
 stage ('Compile Stage') {
