@@ -27,7 +27,7 @@ stage ("initialize") {
 
 stage ('Checkout') {
    steps {
-     git branch: ${params.BRANCH}, url: "https://github.com/srirama-akhilesh/SpringJPA.git"
+     git branch: "${params.BRANCH}", url: "https://github.com/srirama-akhilesh/SpringJPA.git"
    }    
 }
 
