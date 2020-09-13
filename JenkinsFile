@@ -27,26 +27,24 @@ stage ('Checkout') {
         userRemoteConfigs: [[url: 'https://github.com/srirama-akhilesh/SpringJPA.git']]])
      }
 }
+
 stage ('Compile Stage') {
-steps {
-withMaven(maven : 'maven3.6.3') {
-bat'mvn clean compile'
+    steps {
+      sh 'mvn clean verify'
+    }
 }
-}
-}
+
 stage ('Testing Stage') {
-steps {
-withMaven(maven : 'maven3.6.3') {
-bat'mvn test'
+    steps {
+      sh 'mvn test'  
+    }
 }
-}
-}
+
 stage ('Install Stage') {
-steps {
-withMaven(maven : 'maven3.6.3') {
-bat'mvn install'
+    steps {
+          sh 'mvn install'  
+      }
 }
-}
-}
+
 }
 }
