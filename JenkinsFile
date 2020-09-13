@@ -1,17 +1,31 @@
 pipeline {
 agent any
 
+tools{
+    maven 'maven3.6.3'
+    jdk 'JDK13'
+}
+
 stages {
 
+stage ("initialize") {
+    steps {
+        sh '''
+        echo "PATH = ${PATH}"
+        echo "M2_HOME = ${M2_HOME}"
+        '''
+    }
+}
+
 stage ('Checkout') {
-steps {
-    checkout([$class: 'GitSCM',
-    branches: [[name: '*/master']], 
-    doGenerateSubmoduleConfigurations: false, 
-    extensions: [], 
-    submoduleCfg: [], 
-    userRemoteConfigs: [[url: 'https://github.com/srirama-akhilesh/SpringJPA.git']]])
- }
+    steps {
+        checkout([$class: 'GitSCM',
+        branches: [[name: '*/master']], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [[url: 'https://github.com/srirama-akhilesh/SpringJPA.git']]])
+     }
 }
 stage ('Compile Stage') {
 steps {
