@@ -1,6 +1,17 @@
 pipeline {
 agent any
+
 stages {
+
+stage ('Checkout') {
+    checkout([$class: 'GitSCM',
+    branches: [[name: '*/master']], 
+    doGenerateSubmoduleConfigurations: false, 
+    extensions: [], 
+    submoduleCfg: [], 
+    userRemoteConfigs: [[url: 'https://github.com/srirama-akhilesh/SpringJPA.git']]])
+
+}
 stage ('Compile Stage') {
 steps {
 withMaven(maven : 'maven 3.6.3') {
